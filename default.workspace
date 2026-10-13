@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="apps/adapter/board/br28/AC701N.cbp" />
+		<Project filename="apps/adapter/board/br30/adapter_rx_2t1.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

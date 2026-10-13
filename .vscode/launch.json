@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "console": "externalTerminal",
+      "cwd": "d:/方案-华升/JQ9/rx/apps/adapter",
+      "program": "d:/方案-华升/JQ9/rx/apps/adapter/build/Debug/outDebug"
+    }
+  ]
+}
