@@ -15,14 +15,14 @@
 #define WIRELESS_2T1_MICROPHONE_MODE	ENABLE
 
 //配置输出到usb会默认同时输出到dac，配置输出到dac不会输出到usb
-#define WIRELESS_MIC_RX_OUTPUT_SEL		WIRELESS_MIC_RX_OUTPUT_DAC// 从机输出类型选择
+#define WIRELESS_MIC_RX_OUTPUT_SEL		WIRELESS_MIC_RX_OUTPUT_USB_MIC//WIRELESS_MIC_RX_OUTPUT_DAC// 从机输出类型选择
 
 #define WIRELESS_24G_ENABLE				ENABLE //使能此功能可以屏蔽手机搜索到此无线设备名
 #define WIRELESS_NOISEGATE_EN		    DISABLE	//噪声门限使能
 //低延时模式,比非低延时模式少3ms，距离会变短，用户可根据产品应用场景选择,txrx需要保持一致
 #define WIRELESS_LOW_LATENCY			DISABLE
 //编解码采样率如果有修改，请对应修改另一方的编解码采样率
-#define WIRELESS_CODING_SAMPLERATE		(48000)
+#define WIRELESS_CODING_SAMPLERATE		(32000)//(48000)
 
 #if WIRELESS_2T1_MICROPHONE_MODE
 #define WIRELESS_CODING_FRAME_LEN		100
@@ -104,7 +104,7 @@
 #define USB_MEM_NO_USE_OVERLAY_EN		    1
 //部分手机APP录音需要同时开SPEAKER_CLASS,才可以使用USB_MIC录音,能提高兼容性,修改为MIC_CLASS|SPEAKER_CLASS
 //不过开了SPEAKER_CLASS,手机播放音频，就无法外放，需要用户自己根据产品使用场景进行修改
-#define USB_DEVICE_CLASS_CONFIG             MIC_CLASS//|SPEAKER_CLASS
+#define USB_DEVICE_CLASS_CONFIG             MIC_CLASS|SPEAKER_CLASS  //MIC_CLASS//|SPEAKER_CLASS
 #if (USB_DEVICE_CLASS_CONFIG & SPEAKER_CLASS)
 #define TCFG_TYPEC_EARPHONE_TEST_FILTER				1
 #endif
@@ -129,7 +129,7 @@
 //*********************************************************************************//
 //                                 iokey 配置                                      //
 //*********************************************************************************//
-#define TCFG_IOKEY_ENABLE					ENABLE_THIS_MOUDLE //是否使能IO按键
+#define TCFG_IOKEY_ENABLE					0//ENABLE_THIS_MOUDLE //是否使能IO按键
 
 #define TCFG_IOKEY_POWER_CONNECT_WAY		ONE_PORT_TO_LOW    //按键一端接低电平一端接IO
 
@@ -154,7 +154,7 @@
 //*********************************************************************************//
 //                                  充电参数配置                                   //
 //*********************************************************************************//
-#define TCFG_CHARGE_ENABLE					ENABLE_THIS_MOUDLE
+#define TCFG_CHARGE_ENABLE					0//ENABLE_THIS_MOUDLE
 #define TCFG_TEST_BOX_ENABLE				ENABLE_THIS_MOUDLE
 #define TCFG_CHARGESTORE_PORT				IO_PORTP_00
 //是否支持开机充电

@@ -584,13 +584,24 @@ static int event_handle_callback(struct sys_event *event)
                 sys_auto_shut_down_disable();
                 break;
             case ADAPTER_EVENT_DISCONN :
-                if (event->u.dev.value == 1) {
+                // if (event->u.dev.value == 1) {
+                //     printf("ADAPTER_EVENT_DISCONN_FIRST\n");
+                //     wireless_conn_status &= ~BIT(1);
+                // } else {
+                //     printf("ADAPTER_EVENT_DISCONN_SECOND\n");
+                //     wireless_conn_status &= ~BIT(0);
+                // }
+
+                if(event->u.dev.value == 1){
                     printf("ADAPTER_EVENT_DISCONN_FIRST\n");
-                    wireless_conn_status &= ~BIT(1);
-                } else {
-                    printf("ADAPTER_EVENT_DISCONN_SECOND\n");
                     wireless_conn_status &= ~BIT(0);
+                }else if(event->u.dev.value == 2){
+                    printf("ADAPTER_EVENT_DISCONN_SECOND\n");
+                    wireless_conn_status &= ~BIT(1);
+                }else{
+                    wireless_conn_status = 0;
                 }
+
                 ui_update_status(STATUS_BT_DISCONN);
                 if (!wireless_conn_status) {
                     sys_auto_shut_down_enable();

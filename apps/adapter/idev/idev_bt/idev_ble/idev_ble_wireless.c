@@ -300,6 +300,7 @@ void wireless_adapter_idev_event_callback(le_client_event_e event, u8 *packet, i
 #if(APP_MAIN == APP_WIRELESS_MIC_2T1)
         u16 tmp_handle = little_endian_read_16(packet, 3);
         u8 channel = dualmic_conn_2_dec(tmp_handle);
+        u8 conn_slot = channel;//用于清除标志位
 #if WIRELESS_TX_MIC_STEREO_OUTPUT && (!WIRELESS_TX_MIC_STEREO_OUTPUT_AUTO)
         channel = dualmic_get_dec_role(tmp_handle);
 #endif
@@ -318,10 +319,17 @@ void wireless_adapter_idev_event_callback(le_client_event_e event, u8 *packet, i
         if (dualmic_handle_map_get_connected_num() == 0) {
             printf("all disconnted !!, media close\n");
             adapter_process_event_notify(ADAPTER_EVENT_IDEV_MEDIA_CLOSE, 0);
-            adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 1);
+            // adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 1);
         } else {
-            adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 2);
+            // adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 2);
             printf("not all disconnted !! \n");
+        }
+        if(conn_slot == 0){
+            adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 1);
+        }else if(conn_slot == 1){
+            adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 2);
+        }else{
+            adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 0);
         }
 #else
         adapter_process_event_notify(ADAPTER_EVENT_DISCONN, 0);

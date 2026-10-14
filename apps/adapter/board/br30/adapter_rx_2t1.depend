@@ -121,7 +121,7 @@
 	"board_wireless_duplex_dongle/board_wireless_duplex_dongle_cfg.h"
 	"board_wireless_duplex_earphone/board_wireless_duplex_earphone_cfg.h"
 
-1791894183 d:\方案-华升\jq9\rx\apps\adapter\board\br30\board_wireless_mic_2t1_rx\board_wireless_mic_2t1_rx_cfg.h
+1791962653 d:\方案-华升\jq9\rx\apps\adapter\board\br30\board_wireless_mic_2t1_rx\board_wireless_mic_2t1_rx_cfg.h
 	"board_wireless_mic_2t1_rx_global_build_cfg.h"
 
 1687873211 d:\方案-华升\jq9\rx\apps\adapter\board\br30\board_wireless_mic_2t1_rx\board_wireless_mic_2t1_rx_global_build_cfg.h
@@ -3347,7 +3347,7 @@
 	"generic/log.h"
 	"app_config.h"
 
-1687873211 source:d:\方案-华升\jq9\rx\apps\adapter\board\br30\board_wireless_mic_2t1_rx\board_wireless_mic_2t1_rx.c
+1791939703 source:d:\方案-华升\jq9\rx\apps\adapter\board\br30\board_wireless_mic_2t1_rx\board_wireless_mic_2t1_rx.c
 	"app_config.h"
 	"system/includes.h"
 	"media/includes.h"
