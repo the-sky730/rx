@@ -2466,7 +2466,7 @@
 
 1687873211 d:\方案-华升\jq9\rx\apps\adapter\include\power_on.h
 
-1687873211 source:d:\方案-华升\jq9\rx\apps\adapter\app_main\wireless_mic_2t1\2t1_rx.c
+1791965179 source:d:\方案-华升\jq9\rx\apps\adapter\app_main\wireless_mic_2t1\2t1_rx.c
 	"adapter_idev.h"
 	"adapter_odev.h"
 	"adapter_idev_bt.h"
@@ -3060,7 +3060,7 @@
 	"ui_manage.h"
 	"debug.h"
 
-1687873211 source:d:\方案-华升\jq9\rx\apps\adapter\idev\idev_bt\idev_ble\idev_ble_wireless.c
+1791964739 source:d:\方案-华升\jq9\rx\apps\adapter\idev\idev_bt\idev_ble\idev_ble_wireless.c
 	"adapter_idev.h"
 	"adapter_idev_ble.h"
 	"app_config.h"
