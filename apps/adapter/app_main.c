@@ -67,41 +67,34 @@ extern u8 wireless_conn_status;
 void led_mode_set()
 {
     static u8 flash_flag = 0;
-    static u8 last_status = 0xff;
-    static u8 wait_cnt = 0;         //等待第二个TX连接的闪烁计时, 250ms一次
     u8 status = wireless_conn_status;
+    u8 conn_num = 0;
 
-    if (status != last_status) {
-        flash_flag = 0;
-        wait_cnt = 0;               //状态变化时重新计时10秒
-        last_status = status;
+    if (status & BIT(0)) {
+        conn_num++;
+    }
+    if (status & BIT(1)) {
+        conn_num++;
     }
 
-    if (status == 0) {
-        //未连接：双灯闪烁
+    if (conn_num == 0) {
+        // 未连接：PB6、PB7 一起闪
         flash_flag = !flash_flag;
         gpio_direction_output(IO_PORTB_07, flash_flag);
         gpio_direction_output(IO_PORTB_06, flash_flag);
         return;
     }
 
-    flash_flag = !flash_flag;
-    if ((status & BIT(0)) && (status & BIT(1))) {
-        //连接两个TX：双灯常亮
+    if (conn_num == 1) {
+        // 只连一台：只亮 PB7，PB6 灭
         gpio_direction_output(IO_PORTB_07, 1);
-        gpio_direction_output(IO_PORTB_06, 1);
+        gpio_direction_output(IO_PORTB_06, 0);
         return;
     }
 
-    //只连接一个TX：已连接的灯常亮，未连接的灯闪10秒后熄灭
-    if (wait_cnt < 40) {            //40 * 250ms = 10s
-        wait_cnt++;
-        gpio_direction_output(IO_PORTB_07, (status & BIT(0)) ? 1 : flash_flag);
-        gpio_direction_output(IO_PORTB_06, (status & BIT(1)) ? 1 : flash_flag);
-    } else {
-        gpio_direction_output(IO_PORTB_07, !!(status & BIT(0)));
-        gpio_direction_output(IO_PORTB_06, !!(status & BIT(1)));
-    }
+    // 连两台：PB6、PB7 都常亮
+    gpio_direction_output(IO_PORTB_07, 1);
+    gpio_direction_output(IO_PORTB_06, 1);
 }
 
 
