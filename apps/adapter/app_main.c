@@ -67,6 +67,8 @@ extern u8 wireless_conn_status;
 void led_mode_set()
 {
     static u8 flash_flag = 0;
+    static u8 last_num = 0xff;
+    static u8 wait_cnt = 0;
     u8 status = wireless_conn_status;
     u8 conn_num = 0;
 
@@ -75,6 +77,11 @@ void led_mode_set()
     }
     if (status & BIT(1)) {
         conn_num++;
+    }
+        if (conn_num != last_num) {
+        flash_flag = 0;
+        wait_cnt = 0;               // 台数变化时重新计 10 秒
+        last_num = conn_num;
     }
 
     if (conn_num == 0) {
@@ -86,9 +93,15 @@ void led_mode_set()
     }
 
     if (conn_num == 1) {
-        // 只连一台：只亮 PB7，PB6 灭
+        // 只连一台：PB7 常亮，PB6 闪 10 秒后熄灭
         gpio_direction_output(IO_PORTB_07, 1);
-        gpio_direction_output(IO_PORTB_06, 0);
+        if (wait_cnt < 40) {
+            wait_cnt++;
+            flash_flag = !flash_flag;
+            gpio_direction_output(IO_PORTB_06, flash_flag);
+        } else {
+            gpio_direction_output(IO_PORTB_06, 0);
+        }
         return;
     }
 
